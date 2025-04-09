@@ -6,21 +6,14 @@ plugins {
 }
 
 buildscript {
-    repositories {
-        google()
-        mavenCentral()
-    }
-
     dependencies {
-        // Dépendances classpath en Kotlin DSL
-        classpath("com.android.tools.build:gradle:8.6.0")  // Mise à jour à 8.6.0 ou supérieur
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")  // Vérifier la version de Kotlin
+        // Change the AGP version to 8.5.0
+        classpath("com.android.tools.build:gradle:8.5.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.10")
     }
 }
 
+
 allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
+    // Tu peux laisser cette section vide si tu utilises `settings.gradle.kts` pour gérer les dépôts
 }
