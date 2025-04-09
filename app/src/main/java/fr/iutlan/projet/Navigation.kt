@@ -1,19 +1,28 @@
-// ui/components/NavigationButton.kt
-package ui.components
+package navigation
 
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavController
-
+import androidx.navigation.NavHost
+import androidx.navigation.NavType
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.compose.NavHost as ComposeNavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import ui.screens.*
 
 @Composable
-fun NavigationButton(
-    navController: NavController,
-    label: String,
-    destination: String
-) {
-    Button(onClick = { navController.navigate(destination) }) {
-        Text(text = label)
+fun AppNavigation() {
+    val navController = rememberNavController()
+
+    // Correct usage of NavHost here
+    ComposeNavHost(navController = navController, startDestination = "home") {
+        composable("home") { HomeScreen(navController) }
+        composable("screen1") { Screen1(navController) }
+        composable(
+            "screen2/{param}",
+            arguments = listOf(navArgument("param") { type = NavType.StringType })
+        ) { backStackEntry ->
+            Screen2(navController, backStackEntry)
+        }
+        composable("screen3") { Screen3(navController) }
     }
 }
